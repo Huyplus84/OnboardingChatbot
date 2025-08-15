@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Chatbot System Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .diagram-section {
+            padding: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .diagram-section:last-child {
+            border-bottom: none;
+        }
+        
+        .diagram-title {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4facfe;
+            display: inline-block;
+        }
+        
+        .diagram-description {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .mermaid {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+        
+        .feature-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .feature-card p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .download-section {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Onboarding Chatbot System</h1>
+            <p>Visual Architecture & Data Flow Diagrams</p>
+        </div>
+
+        <!-- System Overview -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">📊 System Overview Architecture</h2>
+            <p class="diagram-description">
+                High-level architecture showing the main components and their relationships in the Onboarding Chatbot system.
+            </p>
+            
+            <div class="mermaid">
+                graph TB
+                    U[👤 User/Employee] --> FE[🖥️ React Frontend]
+                    
+                    FE --> |REST API| BE[🔧 Flask Backend]
+                    
+                    BE --> CB[🤖 Chatbot AI]
+                    BE --> RM[🗺️ Roadmap Manager]
+                    BE --> CG[📝 Content Generator]
+                    BE --> DE[📄 Document Extractor]
+                    BE --> VS[🔊 Voice Services]
+                    
+                    CB --> OAI[🧠 OpenAI API]
+                    CB --> VDB[🗂️ ChromaDB]
+                    
+                    RM --> RD[📊 Roadmap Data]
+                    CG --> ET[📧 Email Templates]
+                    DE --> FT[📋 Form Templates]
+                    
+                    VS --> TTS[🔊 Text-to-Speech]
+                    VS --> STT[🎤 Speech-to-Text]
+                    
+                    VDB --> EMB[🔢 Vector Embeddings]
+                    BE --> FS[💾 File Storage]
+                    
+                    classDef userClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                    classDef frontendClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                    classDef backendClass fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+                    classDef serviceClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                    classDef dataClass fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+                    
+                    class U userClass
+                    class FE frontendClass
+                    class BE backendClass
+                    class CB,RM,CG,DE,VS serviceClass
+                    class VDB,RD,ET,FT,FS,EMB,OAI dataClass
+            </div>
+        </div>
+
+        <!-- Main Features -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">🎯 Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🤖 AI Chatbot</h3>
+                    <p>Intelligent Q&A with RAG + GPT-4o</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗺️ Personalized Roadmap</h3>
+                    <p>Custom onboarding paths by role</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📝 Content Generation</h3>
+                    <p>Auto-create emails, summaries, quizzes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📄 Document Processing</h3>
+                    <p>Extract info from CV, auto-fill forms</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔊 Voice Features</h3>
+                    <p>Text-to-Speech & Speech-to-Text</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🧠 Smart Suggestions</h3>
+                    <p>Context-aware question recommendations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Component Diagram -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">🔧 Detailed Component Architecture</h2>
+            <p class="diagram-description">
+                Detailed view showing frontend components, API endpoints, backend modules, and data storage layers.
+            </p>
+            
+            <div class="mermaid">
+                graph TB
+                    subgraph "Frontend Layer"
+                        APP[App.jsx]
+                        CI[ChatbotInterface.jsx]
+                        RG[RoadmapGenerator.jsx]
+                        CG[ContentGenerator.jsx]
+                        DE[DocumentExtractor.jsx]
+                        UI[UI Components]
+                    end
+                    
+                    subgraph "API Layer"
+                        API1[/api/chatbot]
+                        API2[/api/roadmap/*]
+                        API3[/api/content/*]
+                        API4[/api/extract/*]
+                        API5[/api/tts]
+                        API6[/api/stt]
+                    end
+                    
+                    subgraph "Backend Services"
+                        SERVER[server.py]
+                        CHATBOT[chatbot.py]
+                        ROADMAP[personalized_roadmap.py]
+                        CONTENT[content_generator.py]
+                        EXTRACT[document_extractor.py]
+                        TTS[tts.py]
+                        STT[stt.py]
+                    end
+                    
+                    subgraph "External Services"
+                        OPENAI[OpenAI API]
+                    end
+                    
+                    subgraph "Data Storage"
+                        CHROMA[ChromaDB]
+                        JSON[JSON Templates]
+                        FILES[File System]
+                    end
+                    
+                    APP --> CI
+                    APP --> RG
+                    APP --> CG
+                    APP --> DE
+                    
+                    CI --> API1
+                    CI --> API5
+                    CI --> API6
+                    RG --> API2
+                    CG --> API3
+                    DE --> API4
+                    
+                    API1 --> CHATBOT
+                    API2 --> ROADMAP
+                    API3 --> CONTENT
+                    API4 --> EXTRACT
+                    API5 --> TTS
+                    API6 --> STT
+                    
+                    CHATBOT --> OPENAI
+                    ROADMAP --> OPENAI
+                    CONTENT --> OPENAI
+                    EXTRACT --> OPENAI
+                    
+                    CHATBOT --> CHROMA
+                    ROADMAP --> JSON
+                    CONTENT --> JSON
+                    EXTRACT --> JSON
+                    EXTRACT --> FILES
+                    
+                    classDef frontendClass fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+                    classDef apiClass fill:#f1f8e9,stroke:#388e3c,stroke-width:2px
+                    classDef backendClass fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+                    classDef serviceClass fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+                    classDef dataClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+                    
+                    class APP,CI,RG,CG,DE,UI frontendClass
+                    class API1,API2,API3,API4,API5,API6 apiClass
+                    class SERVER,CHATBOT,ROADMAP,CONTENT,EXTRACT,TTS,STT backendClass
+                    class OPENAI serviceClass
+                    class CHROMA,JSON,FILES dataClass
+            </div>
+        </div>
+
+        <!-- Data Flow Diagram -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">🔄 Chatbot Data Flow</h2>
+            <p class="diagram-description">
+                Step-by-step data flow showing how user messages are processed through the chatbot system with AI integration.
+            </p>
+            
+            <div class="mermaid">
+                flowchart TD
+                    A[👤 User Types Message] --> B[📱 Frontend State Update]
+                    B --> C[🌐 API Call to /api/chatbot]
+                    C --> D{🔍 Check Message Type}
+                    
+                    D -->|Special Command| E[⚡ Return Template Response]
+                    D -->|Normal Question| F[🧮 Generate Embedding]
+                    
+                    F --> G[🔍 ChromaDB Vector Search]
+                    G --> H[📄 Retrieve Relevant Documents]
+                    H --> I[🧠 OpenAI GPT-4o Processing]
+                    I --> J[💬 Generate Contextual Answer]
+                    
+                    E --> K[📤 Send Response to Frontend]
+                    J --> K
+                    K --> L[🖥️ Update Chat Interface]
+                    L --> M[👤 User Sees Response]
+                    
+                    N[🔄 Background: Update Suggestions] --> O[🎯 Fetch Smart Suggestions]
+                    O --> P[🏷️ Display Question Badges]
+                    
+                    style A fill:#e3f2fd
+                    style M fill:#e8f5e8
+                    style I fill:#fff3e0
+                    style G fill:#f3e5f5
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">🛠️ Technology Stack</h2>
+            <div class="mermaid">
+                graph LR
+                    subgraph "Frontend"
+                        React[React 19]
+                        Vite[Vite]
+                        Tailwind[Tailwind CSS]
+                        Radix[Radix UI]
+                    end
+                    
+                    subgraph "Backend"
+                        Flask[Flask]
+                        Python[Python 3.x]
+                        CORS[Flask-CORS]
+                    end
+                    
+                    subgraph "AI & ML"
+                        OpenAI[OpenAI GPT-4o]
+                        Embedding[text-embedding-3-small]
+                        ChromaDB[ChromaDB Vector DB]
+                    end
+                    
+                    subgraph "Audio Processing"
+                        TTS[Text-to-Speech]
+                        STT[Speech-to-Text]
+                        WebAudio[Web Audio API]
+                    end
+                    
+                    React --> Flask
+                    Flask --> OpenAI
+                    Flask --> ChromaDB
+                    React --> WebAudio
+                    Flask --> TTS
+                    Flask --> STT
+                    
+                    classDef frontend fill:#61dafb,color:#000
+                    classDef backend fill:#3776ab,color:#fff
+                    classDef ai fill:#412991,color:#fff
+                    classDef audio fill:#ff6b35,color:#fff
+                    
+                    class React,Vite,Tailwind,Radix frontend
+                    class Flask,Python,CORS backend
+                    class OpenAI,Embedding,ChromaDB ai
+                    class TTS,STT,WebAudio audio
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h3>📥 Export Diagrams</h3>
+            <p>You can export these diagrams as images by:</p>
+            <br>
+            <button class="download-btn" onclick="exportAsPNG()">📷 Save as PNG</button>
+            <button class="download-btn" onclick="exportAsSVG()">🎨 Save as SVG</button>
+            <button class="download-btn" onclick="printDiagrams()">🖨️ Print Diagrams</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        function exportAsPNG() {
+            alert('To export as PNG:\n1. Right-click on any diagram\n2. Select "Save image as..."\n3. Choose PNG format');
+        }
+
+        function exportAsSVG() {
+            alert('To export as SVG:\n1. Right-click on any diagram\n2. Select "Inspect element"\n3. Find the SVG element\n4. Copy and save as .svg file');
+        }
+
+        function printDiagrams() {
+            window.print();
+        }
+
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const diagrams = document.querySelectorAll('.mermaid');
+            diagrams.forEach(diagram => {
+                diagram.addEventListener('click', function() {
+                    this.style.transform = this.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
