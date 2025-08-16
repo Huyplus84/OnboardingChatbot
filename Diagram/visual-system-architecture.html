@@ -220,7 +220,7 @@
             
             <div class="mermaid">
                 graph TB
-                    subgraph "Frontend Layer"
+                    subgraph Frontend["Frontend Layer"]
                         APP[App.jsx]
                         CI[ChatbotInterface.jsx]
                         RG[RoadmapGenerator.jsx]
@@ -229,16 +229,16 @@
                         UI[UI Components]
                     end
                     
-                    subgraph "API Layer"
-                        API1[/api/chatbot]
-                        API2[/api/roadmap/*]
-                        API3[/api/content/*]
-                        API4[/api/extract/*]
-                        API5[/api/tts]
-                        API6[/api/stt]
+                    subgraph API["API Layer"]
+                        API1["/api/chatbot"]
+                        API2["/api/roadmap/*"]
+                        API3["/api/content/*"]
+                        API4["/api/extract/*"]
+                        API5["/api/tts"]
+                        API6["/api/stt"]
                     end
                     
-                    subgraph "Backend Services"
+                    subgraph Backend["Backend Services"]
                         SERVER[server.py]
                         CHATBOT[chatbot.py]
                         ROADMAP[personalized_roadmap.py]
@@ -248,11 +248,11 @@
                         STT[stt.py]
                     end
                     
-                    subgraph "External Services"
+                    subgraph External["External Services"]
                         OPENAI[OpenAI API]
                     end
                     
-                    subgraph "Data Storage"
+                    subgraph Data["Data Storage"]
                         CHROMA[ChromaDB]
                         JSON[JSON Templates]
                         FILES[File System]
